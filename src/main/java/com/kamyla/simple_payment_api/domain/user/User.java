@@ -31,7 +31,7 @@ public class User {
 
     private String password;
 
-    private BigDecimal balanche; //saldo do usuario
+    private BigDecimal balance; //saldo do usuario
 
     @Enumerated(EnumType.STRING)
     private UserType userType;
