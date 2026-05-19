@@ -1,6 +1,7 @@
 package com.kamyla.simple_payment_api.domain.user;
 
-import com.kamyla.simple_payment_api.application.UserDTO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.kamyla.simple_payment_api.dto.UserDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -30,6 +31,7 @@ public class User {
     @Column(unique = true)
     private String email;
 
+    @JsonIgnore
     private String password;
 
     private BigDecimal balance; //saldo do usuario
@@ -44,6 +46,7 @@ public class User {
         this.userType = user.userType();
         this.email = user.email();
         this.password = user.password();
+        this.document = user.document();
 
     }
 
