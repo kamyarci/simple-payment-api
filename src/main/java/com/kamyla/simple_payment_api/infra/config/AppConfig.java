@@ -1,4 +1,4 @@
-package com.kamyla.simple_payment_api.infra;
+package com.kamyla.simple_payment_api.infra.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
