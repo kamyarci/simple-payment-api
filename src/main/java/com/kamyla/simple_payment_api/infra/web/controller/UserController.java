@@ -1,9 +1,9 @@
-package com.kamyla.simple_payment_api.controller;
+package com.kamyla.simple_payment_api.infra.web.controller;
 
-import com.kamyla.simple_payment_api.application.UserDTO;
+import com.kamyla.simple_payment_api.dto.UserDTO;
 import com.kamyla.simple_payment_api.domain.user.User;
-import com.kamyla.simple_payment_api.services.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.kamyla.simple_payment_api.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,20 +12,19 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/users")
+@RequiredArgsConstructor
 public class UserController {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
 
     @PostMapping
     public ResponseEntity<User> createUser(@RequestBody UserDTO user) {
         User newUser = userService.createUser(user);
-        return new ResponseEntity<>(newUser, HttpStatus.CREATED);
+        return ResponseEntity.status(HttpStatus.CREATED).body(newUser);
     }
 
     @GetMapping
     public ResponseEntity<List<User>> getAllUsers() {
-        List<User> users = this.userService.getAllUsers();
-        return new ResponseEntity<>(users, HttpStatus.OK);
+        return ResponseEntity.ok(userService.getAllUsers());
     }
 }
