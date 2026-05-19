@@ -1,4 +1,4 @@
-package com.kamyla.simple_payment_api.application;
+package com.kamyla.simple_payment_api.dto;
 
 import com.kamyla.simple_payment_api.domain.user.UserType;
 
