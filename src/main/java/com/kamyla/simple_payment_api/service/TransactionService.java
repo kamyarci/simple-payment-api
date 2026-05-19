@@ -63,7 +63,7 @@ public class TransactionService {
         receiver.setBalance(receiver.getBalance().add(value));
     }
 
-    public boolean authorizeTransaction(User sender, BigDecimal value) {
+    private boolean authorizeTransaction(User sender, BigDecimal value) {
         try {
             Map<String, Object> body = restClient.get()
                     .uri("https://util.devi.tools/api/v2/authorize")

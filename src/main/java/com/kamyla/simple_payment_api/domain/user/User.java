@@ -34,7 +34,7 @@ public class User {
     @JsonIgnore
     private String password;
 
-    private BigDecimal balance; //saldo do usuario
+    private BigDecimal balance;
 
     @Enumerated(EnumType.STRING)
     private UserType userType;
