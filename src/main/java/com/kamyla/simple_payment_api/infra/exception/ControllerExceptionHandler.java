@@ -1,10 +1,7 @@
 package com.kamyla.simple_payment_api.infra.exception;
 
+import com.kamyla.simple_payment_api.domain.exception.*;
 import com.kamyla.simple_payment_api.dto.ExceptionDTO;
-import com.kamyla.simple_payment_api.domain.exception.InsufficientBalanceException;
-import com.kamyla.simple_payment_api.domain.exception.MerchantTransactionException;
-import com.kamyla.simple_payment_api.domain.exception.UnauthorizedTransactionException;
-import com.kamyla.simple_payment_api.domain.exception.UserNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
@@ -38,5 +35,10 @@ public class ControllerExceptionHandler {
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ExceptionDTO> treatGeneralExceptions(Exception exception) {
         return ResponseEntity.internalServerError().body(new ExceptionDTO(exception.getMessage(), "500"));
+    }
+
+    @ExceptionHandler(DuplicateUserException.class)
+    public ResponseEntity<ExceptionDTO> treatDuplicateUser(DuplicateUserException exception) {
+        return ResponseEntity.badRequest().body(new ExceptionDTO(exception.getMessage(), "400"));
     }
 }

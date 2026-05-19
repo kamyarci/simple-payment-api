@@ -1,5 +1,6 @@
 package com.kamyla.simple_payment_api.service;
 
+import com.kamyla.simple_payment_api.domain.exception.DuplicateUserException;
 import com.kamyla.simple_payment_api.dto.UserDTO;
 import com.kamyla.simple_payment_api.domain.exception.InsufficientBalanceException;
 import com.kamyla.simple_payment_api.domain.exception.MerchantTransactionException;
@@ -34,6 +35,14 @@ public class UserService {
     }
 
     public User createUser(UserDTO user) {
+        if (userRepository.findUserByDocument(user.document()).isPresent()) {
+            throw new DuplicateUserException("CPF já cadastrado.");
+        }
+
+        if (userRepository.findUserByEmail(user.email()).isPresent()) {
+            throw new DuplicateUserException("Email já cadastrado.");
+        }
+
         User newUser = new User(user);
         this.saveUser(newUser);
         return newUser;
